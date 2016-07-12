@@ -1,0 +1,101 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.vip.venus.codegen.repository.BusSmsRouteRepository">
+	<resultMap id="BaseResultMap" type="com.vip.venus.codegen.entity.BusSmsRoute">
+		<id column="route_id" property="routeId" jdbcType="BIGINT" />
+		<result column="sms_code" property="smsCode" jdbcType="VARCHAR" />
+		<result column="biz_scenario" property="bizScenario" jdbcType="VARCHAR" />
+		<result column="type_code" property="typeCode" jdbcType="VARCHAR" />
+		<result column="template_code" property="templateCode"
+			jdbcType="VARCHAR" />
+		<result column="route_channel" property="routeChannel"
+			jdbcType="TINYINT" />
+		<result column="belong_prd" property="belongPrd" jdbcType="TINYINT" />
+		<result column="create_time" property="createTime" jdbcType="TIMESTAMP" />
+		<result column="update_time" property="updateTime" jdbcType="TIMESTAMP" />
+		<result column="is_deleted" property="isDeleted" jdbcType="TINYINT" />
+	</resultMap>
+
+	<sql id="Base_Column_List">
+		route_id,
+		sms_code,
+		biz_scenario,
+		type_code,
+		template_code,
+		route_channel,
+		belong_prd,
+		create_time,
+		update_time,
+		is_deleted
+	</sql>
+
+	<insert id="insert" parameterType="com.vip.vipxgroute.sys.entity.BusSmsRoute" useGeneratedKeys="true" keyProperty="routeId">
+		insert into bus_sms_route (
+		sms_code,
+		biz_scenario,
+		type_code,
+		template_code,
+		route_channel,
+		belong_prd,
+		create_time,
+		update_time,
+		is_deleted
+		)
+		values (
+		#{smsCode,jdbcType=VARCHAR},
+		#{bizScenario,jdbcType=VARCHAR},
+		#{typeCode,jdbcType=VARCHAR},
+		#{templateCode,jdbcType=VARCHAR},
+		#{routeChannel,jdbcType=TINYINT},
+		#{belongPrd,jdbcType=TINYINT},
+		#{createTime,jdbcType=TIMESTAMP},
+		#{updateTime,jdbcType=TIMESTAMP},
+		#{isDeleted,jdbcType=TINYINT}
+		)
+	</insert>
+
+	<update id="update" parameterType="com.vip.vipxgroute.sys.entity.BusSmsRoute">
+		update bus_sms_route
+		<set>
+			<if test="smsCode != null">
+				sms_code= #{smsCode,jdbcType=VARCHAR},
+			</if>
+			<if test="bizScenario != null">
+				biz_scenario= #{bizScenario,jdbcType=VARCHAR},
+			</if>
+			<if test="typeCode != null">
+				type_code= #{typeCode,jdbcType=VARCHAR},
+			</if>
+			<if test="templateCode != null">
+				template_code= #{templateCode,jdbcType=VARCHAR},
+			</if>
+			<if test="routeChannel != null">
+				route_channel= #{routeChannel,jdbcType=TINYINT},
+			</if>
+			<if test="belongPrd != null">
+				belong_prd= #{belongPrd,jdbcType=TINYINT},
+			</if>
+			<if test="createTime != null">
+				create_time= #{createTime,jdbcType=TIMESTAMP},
+			</if>
+			<if test="updateTime != null">
+				update_time= #{updateTime,jdbcType=TIMESTAMP},
+			</if>
+			<if test="isDeleted != null">
+				is_deleted= #{isDeleted,jdbcType=TINYINT},
+			</if>
+		</set>
+		where route_id = #{routeId,jdbcType=BIGINT}
+	</update>
+
+	<select id="selectBySmsCode" resultMap="BaseResultMap">
+		select 
+		<include refid="Base_Column_List"/>
+		from bus_sms_route
+		where sms_code = #{smsCode,jdbcType=VARCHAR} and is_deleted = 0
+	</select>
+</mapper>
+  
+
+  
+	
